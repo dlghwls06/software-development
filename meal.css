@@ -1,0 +1,119 @@
+* {
+    font-family: '여기어때 잘난체 OTF', '맑은고딕', '돋움';
+}
+
+body {
+    background-color: rgb(255, 239, 208);
+    color: rgb(206, 109, 30);
+    font-size: 20pt;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.menu li {
+    margin: 35px;
+}
+
+canvas {
+    transition: 2s;
+}
+
+.menu * {
+    display: flex;
+}
+
+.menu li a {
+    color: rgb(206, 109, 30);
+    text-decoration: none;
+}
+
+button {
+    background: #febf00;
+    margin-top: 1rem;
+    padding: 0.8rem 1.8rem;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+button:active {
+    background: #444;
+    color: #f9f9f9;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.roulette-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.roulette {
+    width: 380px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* 가상요소 만들기 (룰렛 안 검은 작대기) */
+
+.roulette::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 50px;
+    border-radius: 5px;
+    background: #000;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 22;
+}
+
+/* 카테고리 설명칸 */
+
+.category {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.category-container {
+    margin-top: 20px;
+    height: 1px;
+}
+
+header {
+    font-size: 30px;
+}

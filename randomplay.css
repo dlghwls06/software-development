@@ -1,0 +1,97 @@
+* {
+    font-family: '여기어때 잘난체 OTF', '맑은고딕', '돋움';
+    text-align: center;
+}
+
+body {
+    background-color: #bbd7ff;
+    color: rgb(56, 33, 149);
+    font-size: 20pt;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu * {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.menu li {
+    margin: 35px;
+}
+
+.menu li a {
+    color: rgb(56, 33, 149);
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: #384c69;
+    margin-bottom: 30px;
+}
+
+td {
+    border: 1px solid black;
+    padding: 15px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-container button {
+    margin-bottom: 15px;
+    background-color: #7fb4ff;
+    color: rgb(56, 33, 149);
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.3em;
+}
+
+.button-container button:hover {
+    background-color: rgb(148, 208, 238);
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: rgb(232, 242, 245);
+    border: 1px solid #072b5e;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    font-size: 1.5em;
+}
+
+.scroll-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    scroll-snap-type: y mandatory;
+}
+
+.scroll-section {
+    scroll-snap-align: start;
+    width: 100%;
+    height: 100%;
+}
+
+header {
+    font-size: 30px;
+}

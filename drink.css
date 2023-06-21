@@ -1,0 +1,58 @@
+* {
+    font-family: '여기어때 잘난체 OTF', '맑은고딕', '돋움';
+    text-align: center;
+}
+
+body {
+    background-color: rgb(255, 208, 208);
+    color: rgb(206, 30, 30);
+    font-size: 20pt;
+}
+
+.menu * {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu li {
+    margin: 35px;
+}
+
+.menu li a {
+    color: rgb(206, 30, 30);
+    text-decoration: none;
+}
+
+.menu ul {
+    padding-left: 0px;
+}
+
+button {
+    background-color: rgb(206, 30, 30);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 25px;
+    padding: 10px 15px;
+}
+
+button:hover {
+    background-color: rgb(247, 88, 88);
+}
+
+header {
+    font-size: 30px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    height: 50%;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>밥집 추천해드립니다!</title>
+        <link rel="stylesheet" type="text/css" href="meal.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="menu">
+                <ul>
+                    <li><a href="index.html"> HOME </a></li>
+                    <li><a href="meal.html"> 밥집추천 </a></li>
+                    <li><a href="play.html"> 놀곳추천 </a></li>
+                    <li><a href="drink.html"> 술집추천 </a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="title">
+            <h1>오늘 어디서 뭐먹지?</h1>
+            <h3>룰렛으로 정해보세요!</h3>
+        </div>
+        <div class="container">
+            <div class="roulette-container">
+                <div class="roulette">
+                    <canvas width="380" height="380"></canvas>
+                    <button onclick="rotate()">룰렛 돌리기</button>
+                </div>
+            </div>
+            <div class="category">
+                <div class="category-container">
+                    <h3>한식</h3>
+                    <ul>
+                        <li>화반</li>
+                        <li>평창 메밀 막국수</li>
+                        <li>뜨락</li>
+                        <li>부르다</li>
+                        <li>엄마밥상</li>
+                        <li>냉정 종가 김치찜</li>
+                        <li>까만 고무신 식당</li>
+                    </ul>
+                </div>
+                <div class="category-container">
+                    <h3>중식</h3>
+                    <ul>
+                        <li>무지개 반점</li>
+                        <li>황금룡</li>
+                        <li>찬팅</li>
+                        <li>홍짜장</li>
+                        <li>용빈각</li>
+                    </ul>
+                </div>
+
+                <div class="category-container">
+                    <h3>양식</h3>
+                    <ul>
+                        <li>BEK</li>
+                        <li>암파스타레</li>
+                        <li>바라또</li>
+                        <li>피자스쿨</li>
+                        <li>빅스타피자</li>
+                    </ul>
+                </div>
+
+                <div class="category-container">
+                    <h3>일식</h3>
+                    <ul>
+                        <li>꼬망</li>
+                        <li>전원일기 소바</li>
+                        <li>원카츠</li>
+                        <li>스시후</li>
+                        <li>구삼초밥</li>
+                        <li>우마미</li>
+                    </ul>
+                </div>
+
+                <div class="category-container">
+                    <h3>고기집</h3>
+                    <ul>
+                        <li>옛날삼겹</li>
+                        <li>무한지대고기부페</li>
+                        <li>냉정칠성곱창</li>
+                        <li>국민축산</li>
+                        <li>고금식당</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        const $c = document.querySelector('canvas'); //html 문서 내의 canvas요소 선택 후 $c변수에 할당
+        const ctx = $c.getContext(`2d`); //캔버스 요소의 2d그래픽 컨텍스트 가져오기
+
+        const category = ['한식', '중식', '양식', '일식', '고기집']; //항목 설정
+        const colors = ['#22A699', '#F2BE22', '#F29727', '#F24C3D', '#7986C7']; //항목 색 설정
+
+        const newMake = () => {
+            //newMake 함수 정의 후 캔버스 중점 위치 잡기.
+            const [cw, ch] = [$c.width / 2, $c.height / 2]; //cw = 캔버스 가로 절반, ch = 캔버스 세로 절반
+            const arc = Math.PI / (category.length / 2); //캔버스의 width, height 절반의 값을 통해서 알 수 있음
+
+            //룰렛 배경 그리기
+            for (let i = 0; i < category.length; i++) {
+                //카테고리 배열의 반복 의미
+                ctx.beginPath(); //새로운 도형 그릴 준비(캔버스 컨텍스트 초기화)
+                ctx.fillStyle = colors[i % colors.length]; //배열을 순환하면서 배경색 지정
+                ctx.moveTo(cw, ch); //현재 위치 지정, 룰렛의 중심 좌표인 cw,ch 사용하여 시작점 설정
+                ctx.arc(cw, ch, cw, arc * (i - 1), arc * i); //호(arc) 그리기 (룰렛의 캔버스 너비와 높이 절반을 기준으로 함)
+                ctx.fill(); //도형 색 채우기
+                ctx.closePath(); //도형 그리기 종료
+            }
+
+            ctx.fillStyle = '#fff'; //룰렛 안 글자 색 (흰색)
+            ctx.font = '18px Pretendard'; //텍스트 크기와 글꼴
+            ctx.textAlign = 'center'; //텍스트를 가운데 정렬
+
+            for (let i = 0; i < category.length; i++) {
+                const angle = arc * i + arc / 2; //각 카테고리의 각도 계산(한식, 중식 등)
+
+                ctx.save(); //현재 캔버스 상태 저장
+
+                ctx.translate(cw + Math.cos(angle) * (cw - 50), ch + Math.sin(angle) * (ch - 50)); //캔버스의 중심점을 카테고리 위치로 이동(회전 및 텍스트 위치 지정 용이)
+
+                ctx.rotate(angle + Math.PI / 2); //캔버스를 현재 카테고리 각도에 따라 회전시킴, Math.PI / 2는 룰렛 섹션의 텍스트 수직 정렬
+
+                //현재 카테고리의 텍스트를 그림. category[i]현재 카테고리의 문자열, split(' ')공백을 기준으로 문자열을 나눔
+                //forEach루프를 사용 분리된 각 단어를 순회, ctx.fillText는함수를 호출 후 텍스트그림, 0은 x좌표 오프셋, 30*j는 각 단어의 y좌표 오프셋 따라서 각 단어는 30픽셀 간격으로 그려짐
+                category[i].split(' ').forEach((text, j) => {
+                    ctx.fillText(text, 0, 30 * j);
+                });
+
+                ctx.restore(); //이전에 저장한 캔버스 상태로 복구
+            }
+        };
+
+        const rotate = () => {
+            $c.style.transform = `initial`;
+            $c.style.transition = `initial`;
+
+            setTimeout(() => {
+                const ran = Math.floor(Math.random() * category.length);
+
+                const arc = 360 / category.length;
+                const rotate = ran * arc + 3600 + arc * 2 - arc / 4;
+
+                $c.style.transform = `rotate(-${rotate}deg)`;
+                $c.style.transition = `2s`;
+
+                setTimeout(() => alert(`오늘의 메뉴는?! ${category[ran]} 어떠신가요?`), 2000);
+            }, 1);
+        };
+
+        newMake();
+    </script>
+</html>
